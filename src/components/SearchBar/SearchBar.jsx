@@ -1,13 +1,16 @@
 import React from 'react';
 import { StyledSearchBar } from './SearchBar.styled';
 
-const SearchBar = () => {
+const SearchBar = ({filtered}) => {
     return(
         <StyledSearchBar>
             <input
-            name="search"
             type="text" 
             placeholder="Buscar..."
+            value={filtered.query}
+            onChange={(e) => {
+                filtered.setQuery(e.target.value);
+            }}
             autoComplete="off"         
             />
         </StyledSearchBar>

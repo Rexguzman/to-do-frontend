@@ -1,14 +1,15 @@
 {
-  "homepage": "http://gitname.github.io/to-do-app",
+  "homepage": "https://github.com/Rexguzman/to-do-frontend",
   "name": "to-do-app",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "build": "webpack --mode production",
-    "start": "webpack-dev-server --open --mode development --host 192.168.31.101",
-    "deploy": "gh-pages -d build"
+    "start": "webpack-dev-server --open --mode development"
   },
   "keywords": [],
   "author": "",
