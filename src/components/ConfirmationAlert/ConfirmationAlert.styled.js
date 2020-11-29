@@ -57,7 +57,7 @@ export const StyledConfirmationAlert = styled.section`
     color:white;
     text-align:center;
 
-    @media (max-width: 1150px) {
+    @media (max-width: ${({ theme }) => theme.tablet}) {
         
     }
 

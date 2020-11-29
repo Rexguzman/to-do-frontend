@@ -11,10 +11,9 @@ export const StyledPlusIcon = styled.section`
     border: none;
     outline-color: transparent;
     border-radius: 50%;
-    box-shadow:0 0px 50px 10px rgba(0,0,0,0.5),0 6px 20px 0 rgba(0,0,0,0.5);
 
 
-    @media (max-width: 1150px) {
+    @media (max-width: ${({ theme }) => theme.tablet}) {
         width: 50px;
         height: 50px;
         bottom: 25px;

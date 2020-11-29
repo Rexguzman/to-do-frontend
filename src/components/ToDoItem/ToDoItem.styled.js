@@ -8,6 +8,7 @@ export const StyledToDoItem = styled.section`
     border: ${ ({completed}) => completed ? "solid RGB(38, 255, 0, 219)" : "none"};
     border-radius:5px;
     margin: 10px 0px;
+    transition: all 0.25s linear;
 
     button {
         border:0;
@@ -28,6 +29,7 @@ export const StyledToDoItem = styled.section`
         background-color: RGB(0,64,166, 0.4);
         border: solid RGB(0, 84, 219);
         border-radius:5px;
+        transition: all 0.5s ease-in;
     }
     
     textarea {
@@ -99,7 +101,7 @@ export const StyledToDoItem = styled.section`
         margin: 12px 20px;
     }
 
-    @media (max-width: 1150px) {
+    @media (max-width: ${({ theme }) => theme.tablet}) {
         svg {
         width:30px;
         height:30px

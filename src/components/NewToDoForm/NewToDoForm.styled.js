@@ -92,7 +92,7 @@ export const StyledNewToDoForm = styled.section`
         margin: 0px 10px 20px 10px;
     }
 
-    @media (max-width: 1150px) {
+    @media (max-width: ${({ theme }) => theme.tablet}) {
         section {
             margin: 0px 30px;
         }

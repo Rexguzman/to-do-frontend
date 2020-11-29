@@ -9,7 +9,10 @@ export const StyledItemContainer = styled.section`
     width: -webkit-fill-available;
     margin-right: 20px;
 
-    @media (max-width: 1150px) {
+    @media (max-width: ${({ theme }) => theme.tablet}) {
         margin-left: 80px;
+    }
+    @media (max-width: ${({ theme }) => theme.mobile}) {
+        margin-left: 20px;
     }
 `
