@@ -6,6 +6,8 @@ export const StyledNavBarContainer = styled.section`
     height: 100vh;
     transition: width 0.3s ease-in-out;
     position: fixed;
+    z-index: 1;
+    padding: 5px 0px;
 
     a {
         display: flex;
@@ -17,12 +19,18 @@ export const StyledNavBarContainer = styled.section`
         width: -webkit-fill-available;
     }
 
+    a:hover {
+        background-color: RGB(0, 0, 0, 0.4);
+        border-radius: 35px;
+        transition: all 0.2s linear;
+    }
+
     h3 {
         display: ${({ isShown }) => (isShown ? 'block' : 'none')};
         margin: 0px 5px;
     }
 
-    .name {
+    .user_name {
         font-size: 10px;
     }
 

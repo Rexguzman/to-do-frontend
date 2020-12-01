@@ -11,11 +11,9 @@ import useFilter from '../../hooks/useFilter';
 const Economy = () => {
     return (
         <React.Fragment>
+            <NavBar economy={'select_item'} />
             <StyledDashboardContainer>
-                <NavBar economy={'select_item'} />
-                <StyledItemContainer>
-                    <section></section>
-                </StyledItemContainer>
+                
             </StyledDashboardContainer>
         </React.Fragment>
     );

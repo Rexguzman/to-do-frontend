@@ -99,6 +99,7 @@ export const StyledToDoItem = styled.section`
 
     figure {
         margin: 12px 20px;
+        cursor: pointer;
     }
 
     @media (max-width: ${({ theme }) => theme.tablet}) {
