@@ -11,6 +11,7 @@ export const StyledPlusIcon = styled.section`
     border: none;
     outline-color: transparent;
     border-radius: 50%;
+    cursor: pointer;
 
 
     @media (max-width: ${({ theme }) => theme.tablet}) {
