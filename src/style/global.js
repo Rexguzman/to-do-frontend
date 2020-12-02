@@ -33,6 +33,10 @@ body::-webkit-scrollbar-thumb {
 input, textarea {
   font-family: 'Open Sans', sans-serif;
 }
+
+button {
+  outline: none;
+}
 `
 export const StyledContainer = styled.section`
     display:flex;
