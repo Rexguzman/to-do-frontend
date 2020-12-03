@@ -10,6 +10,7 @@ export const StyledConfirmationAlert = styled.section`
     display: flex;
     flex-direction: column;
     align-items: center;
+    z-index: 1;
 
     .x_icon {
         position: absolute;

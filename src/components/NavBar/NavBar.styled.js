@@ -100,6 +100,7 @@ export const StyledBurgerButton = styled.figure`
     outline-color: transparent;
     border-radius: 50%;
     transform: translateX(265px);
+    z-index: 0;
 
     @media (max-width: ${({ theme }) => theme.mobile}) {
         display: ${({ open }) => (open ? 'none' : 'block')};
