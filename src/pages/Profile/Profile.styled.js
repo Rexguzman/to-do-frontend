@@ -73,10 +73,15 @@ export const StyledProfileContainer = styled.section`
 
         .profile_buttons_container {
             display: inline-block;
+            width: 100%;
             width: -webkit-fill-available;
+            width: -moz-available;
 
             button {
+                width: 100%;
                 width: -webkit-fill-available;
+                width: -moz-available;
+                width: -moz-available;
                 margin: 5px 0;
             }
         }
@@ -86,15 +91,19 @@ export const StyledProfileContainer = styled.section`
 
         .profile_item_container {
             display: contents;
+            width: 100%;
             width: -webkit-fill-available;
+            width: -moz-available;
 
             .profile_value {
                 width: inherit;
                 margin: 0 25px;
             }
             .user_info {
-                margin:20px 0;
+                margin: 20px 0;
+                width: 100%;
                 width: -webkit-fill-available;
+                width: -moz-available;
             }
         }
     }
@@ -102,7 +111,9 @@ export const StyledProfileContainer = styled.section`
 
 export const StyledItemContainer = styled.section`
     margin-left: 20px;
+    width: 100%;
     width: -webkit-fill-available;
+    width: -moz-available;
     margin-right: 20px;
 
     @media (max-width: ${({ theme }) => theme.tablet}) {

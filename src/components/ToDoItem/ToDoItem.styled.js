@@ -89,7 +89,9 @@ export const StyledToDoItem = styled.section`
     }
 
     .to-do-item_text {
+        width: 100%;
         width: -webkit-fill-available;
+        width: -moz-available;
     }
 
     svg {

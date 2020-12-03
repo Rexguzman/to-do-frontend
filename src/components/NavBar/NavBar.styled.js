@@ -16,7 +16,9 @@ export const StyledNavBarContainer = styled.section`
         text-decoration: none;
         margin: 0;
         color: inherit;
+        width: 100%;
         width: -webkit-fill-available;
+        width: -moz-available;
     }
 
     a:hover {
