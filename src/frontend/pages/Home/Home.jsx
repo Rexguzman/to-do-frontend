@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 
@@ -7,12 +7,14 @@ import { StyledDashboardContainer, StyledItemContainer } from './Home.styled';
 import NewToDoForm from '../../components/NewToDoForm';
 
 import { useIsOpen } from '../../hooks/useIsOpen';
-import useFilter from '../../hooks/useFilter'
+import useFilter from '../../hooks/useFilter';
+
+import ReactDOMServer from 'react-dom/server';
 
 const Home = ({ notes }) => {
     const open = useIsOpen();
     const filtered = useFilter(notes);
-
+    
     return (
         <StyledDashboardContainer>
             <NavBar toDos={'select_item'} />
@@ -26,10 +28,7 @@ const Home = ({ notes }) => {
                 <figure onClick={() => open.handleClick()}>
                     <PlusIcon />
                 </figure>
-                {ReactDOM.createPortal(
-                    <NewToDoForm open={open} />,
-                    document.getElementById('modal')
-                )}
+                    <NewToDoForm open={open}/>
             </StyledItemContainer>
         </StyledDashboardContainer>
     );

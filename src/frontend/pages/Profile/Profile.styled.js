@@ -81,7 +81,6 @@ export const StyledProfileContainer = styled.section`
                 width: 100%;
                 width: -webkit-fill-available;
                 width: -moz-available;
-                width: -moz-available;
                 margin: 5px 0;
             }
         }

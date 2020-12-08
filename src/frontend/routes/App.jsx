@@ -6,7 +6,7 @@ import { Economy, Home, Login, Register, Profile, Error404 } from '../pages';
 
 const App = () => {
     return (
-        <HashRouter>
+        <BrowserRouter>
             <Layout>
                 <Switch>
                     <Route exact path="/" component={Home} />
@@ -17,7 +17,7 @@ const App = () => {
                     <Route component={Error404} />
                 </Switch>
             </Layout>
-        </HashRouter>
+        </BrowserRouter>
     );
 };
 

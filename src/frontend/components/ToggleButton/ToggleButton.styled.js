@@ -7,7 +7,7 @@ export const StyledToggleButton = styled.section`
 
     circle {
         fill: white;
-        transition: transform 0.2s;
+        transition: transform 0.4s;
         transform: ${({ theme }) => theme.transform};
     }
     path {
