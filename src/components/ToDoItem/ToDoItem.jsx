@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { deleteNote, setComplete, editToDo } from '../../actions';
 
@@ -88,9 +87,7 @@ const ToDoItem = props => {
                     </section>
                     </div>
                 </StyledToDoItem>
-                    {ReactDOM.createPortal(<ConfirmationAlert open={open} id={id} handlerDeleteNote={handlerDeleteNote}/>,
-                    document.getElementById('modal')
-                    )}
+                    <ConfirmationAlert open={open} id={id} handlerDeleteNote={handlerDeleteNote}/>
             </React.Fragment>
         )
     }else {

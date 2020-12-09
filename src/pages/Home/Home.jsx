@@ -26,10 +26,7 @@ const Home = ({ notes }) => {
                 <figure onClick={() => open.handleClick()}>
                     <PlusIcon />
                 </figure>
-                {ReactDOM.createPortal(
-                    <NewToDoForm open={open} />,
-                    document.getElementById('modal')
-                )}
+                    <NewToDoForm open={open} />
             </StyledItemContainer>
         </StyledDashboardContainer>
     );
