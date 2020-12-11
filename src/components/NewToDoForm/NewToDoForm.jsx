@@ -25,6 +25,7 @@ const NewToDoForm = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         props.newToDo(form);
+        setValues({ title: '', description: '', completed: false });
         open.handleClick();
     };
 
