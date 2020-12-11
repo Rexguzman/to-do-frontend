@@ -26,7 +26,6 @@ const NewToDoForm = (props) => {
         event.preventDefault();
         props.newToDo(form);
         open.handleClick();
-        props.history.push('/');
     };
 
     if (!open.isOpen) {

@@ -46,7 +46,6 @@ const ToDoItem = props => {
         event.preventDefault();
         props.editToDo(form);
         useIsEditable(false);
-        props.history.push('/');
     }
 
     if(!isEditable){
