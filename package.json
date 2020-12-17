@@ -9,7 +9,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "build": "webpack --mode production",
-    "start": "webpack-dev-server --open --mode development"
+    "start": "webpack-dev-server --open --mode development --host 192.168.31.101"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +20,7 @@
     "react-dom": "^16.14.0",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
+    "react-transition-group": "^4.4.1",
     "redux": "^4.0.5",
     "styled-components": "^5.2.1"
   },

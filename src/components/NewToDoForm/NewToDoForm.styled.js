@@ -117,8 +117,15 @@ export const StyledNewToDoForm = styled.section`
         border: none;
         border-radius: 5px;
         margin: 10px 0px;
-        box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.1),
-            0 6px 20px 0 rgba(0, 0, 0, 0.1);
         cursor: pointer;
     }
+    .modal-transition-appear {
+  transition: transform 300ms;
+  transform: translateY(-100%);
+}
+
+.modal-transition-appear-active {
+  transform: translateY(0);
+}
+
 `;
