@@ -6,7 +6,7 @@ export const StyledToDoItem = styled.section`
     background-color: ${({ theme }) => theme.secundary};
     background-color: ${ ({completed}) => completed ? "RGB(0, 255, 123, 0.4)" : "none"} ;
     border: ${ ({completed}) => completed ? "solid RGB(38, 255, 0, 219)" : "none"};
-    border-radius:5px;
+    border-radius:30px;
     margin: 10px 0px;
     transition: all 0.25s linear;
 
@@ -28,7 +28,7 @@ export const StyledToDoItem = styled.section`
     .active-edit-item{
         background-color: RGB(0,64,166, 0.4);
         border: solid RGB(0, 84, 219);
-        border-radius:5px;
+        border-radius:30px;
         transition: all 0.5s ease-in;
     }
     
