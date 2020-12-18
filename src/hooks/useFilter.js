@@ -9,10 +9,10 @@ const useFilter = (dataArray) => {
             return (
                 filterElement.title
                     .toLowerCase()
-                    .includes(query.toLocaleLowerCase()) ||
+                    .includes(query.toLowerCase()) ||
                 filterElement.description
                     .toLowerCase()
-                    .includes(query.toLocaleLowerCase())
+                    .includes(query.toLowerCase())
             );
         });
 
