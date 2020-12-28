@@ -1,19 +1,41 @@
-import React from 'react';
-import { BrowserRouter, Switch, Route, HashRouter } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import {
+    BrowserRouter,
+    Switch,
+    Route,
+    HashRouter,
+    Redirect,
+} from 'react-router-dom';
+import { connect } from 'react-redux';
+
 import Layout from '../layout/Layout';
 
 import { Economy, Home, Login, Register, Profile, Error404 } from '../pages';
 
-const App = () => {
+const App = ({ user }) => {
+    const [isLogged, setIsLogged] = useState(false);
+
+    useEffect(() => setIsLogged(user.isLogged), [user.isLogged]);
+
     return (
         <HashRouter>
             <Layout>
                 <Switch>
-                    <Route exact path="/" component={Home} />
-                    <Route exact path="/profile" component={Profile} />
-                    <Route exact path="/economy" component={Economy} />
-                    <Route exact path="/login" component={Login} />
-                    <Route exact path="/register" component={Register} />
+                    <Route exact path="/">
+                        {isLogged ? <Home /> : <Redirect to="/login" />}
+                    </Route>
+                    <Route exact path="/login">
+                        {isLogged ? <Redirect to="/" /> : <Login />}
+                    </Route>
+                    <Route exact path="/register">
+                        {isLogged ? <Redirect to="/" /> : <Register />}
+                    </Route>
+                    <Route exact path="/profile">
+                        {isLogged ? <Profile /> : <Redirect to="/login" />}
+                    </Route>
+                    <Route exact path="/economy">
+                        {isLogged ? <Economy /> : <Redirect to="/login" />}
+                    </Route>
                     <Route component={Error404} />
                 </Switch>
             </Layout>
@@ -21,4 +43,10 @@ const App = () => {
     );
 };
 
-export default App;
+const mapStateToProps = (state) => {
+    return {
+        user: state.user,
+    };
+};
+
+export default connect(mapStateToProps, null)(App);

@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export const deleteNote = (payload) => ({
     type: 'DELETE_NOTE',
     payload,
@@ -8,8 +10,19 @@ export const setComplete = (payload) => ({
     payload,
 });
 
-export const loginRequest = (payload) => ({
-    type: 'LOGIN_REQUEST',
+export const loginRequest = (payload) => {
+    const info = {
+        ...payload,
+        isLogged: true,
+    };
+    return {
+        type: 'LOGIN_REQUEST',
+        info,
+    };
+};
+
+export const logoutRequest = (payload) => ({
+    type: 'LOGOUT_REQUEST',
     payload,
 });
 
@@ -35,3 +48,42 @@ export const editToDo = (payload) => ({
     type: 'EDIT_TO_DO',
     payload,
 });
+
+export const setError = payload => ({
+    type: 'SET_ERROR',
+    payload,
+})
+
+export const deleteError = payload => ({
+    type: 'DELETE_ERROR',
+    payload,
+})
+
+export const registerUser = (payload, redirectUrl) => {
+    return (dispatch) => {
+        axios.post('http://localhost:8000/auth/sign-up', payload).then(({data}) => dispatch(registerRequest(data))).then(()=>{
+            window.location.href = redirectUrl
+        }).catch(error => dispatch(setError(error)))
+    }
+}
+
+export const loginUser = ({email,password}, redirectUrl) => {
+    return (dispatch) => {
+        axios({
+            url: 'http://localhost:8000/auth/sign-in',
+            method: 'post',
+            auth: {
+                username: email,
+                password
+            }
+        }).then(({data})=>{
+            document.cookie = `email=${data.user.email}`;
+            document.cookie = `name=${data.user.name}`;
+            document.cookie = `id=${data.user.id}`;
+            document.cookie = `token=${data.user.token}`;
+            dispatch(loginRequest(data.user))
+        }).then(() => {
+            window.location.href = redirectUrl;
+        }).catch(error => dispatch(setError(error)))
+    }
+}

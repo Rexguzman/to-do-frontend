@@ -1,10 +1,25 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { logoutRequest } from "../../actions";
 
 import { NavBar } from '../../components';
 import { StyledDashboardContainer } from '../Economy/Economy.styled';
 import { StyledProfileContainer, StyledItemContainer } from './Profile.styled';
 
-const Profile = () => {
+const Profile = (props) => {
+
+    const {user} = props
+
+    const handleLogout = () => {
+        document.cookie = "email=";
+        document.cookie = "name=";
+        document.cookie = "id=";
+        document.cookie = "token=";
+        props.logoutRequest({});
+        window.location.href = '/#/login'
+
+    }
+
     return (
         <StyledDashboardContainer>
             <NavBar profile={'select_item'} />
@@ -19,13 +34,13 @@ const Profile = () => {
                     <div className="profile_item_container">
                         <p className="profile_value">Nombre:</p>
                         <div className="user_info">
-                            <p>Rex Guzmán</p>
+                            <p>{user.name}</p>
                         </div>
                     </div>
                     <div className="profile_item_container">
                         <p className="profile_value">Email:</p>
                         <div className="user_info">
-                            <p>rexguzman@gmail.com</p>
+                            <p>{user.email}</p>
                         </div>
                     </div>
                     <div className="profile_buttons_container">
@@ -61,7 +76,7 @@ const Profile = () => {
                                     />
                                 </svg>
                             </figure>
-                            <button>Cerrar sessión</button>
+                            <button onClick={handleLogout}>Cerrar sessión</button>
                         </div>
                     </div>
                 </StyledProfileContainer>
@@ -70,4 +85,14 @@ const Profile = () => {
     );
 };
 
-export default Profile;
+const mapStateToProps = state => {
+    return {
+      user: state.user,
+    };
+  };
+
+const mapDispatchToProps = {
+    logoutRequest,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

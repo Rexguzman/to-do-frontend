@@ -42,5 +42,5 @@ export const StyledContainer = styled.section`
     display:flex;
     justify-content:center;
     align-items:content;
-    height:97vh;
+    height:100vh;
 `

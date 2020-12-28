@@ -15,6 +15,8 @@ export const StyledLogin = styled.section`
     a {
     color: white;
     text-decoration: none;
+    width:80%;
+        height: 40px;
     }
 
     h1 {
@@ -23,7 +25,7 @@ export const StyledLogin = styled.section`
     }
 
     button {
-        width:80%;
+        width:100%;
         height: 40px;
         border: none;
         border-radius: 5px;

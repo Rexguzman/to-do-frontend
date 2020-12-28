@@ -9,12 +9,13 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "build": "webpack --mode production",
-    "start": "webpack-dev-server --open --mode development --host 192.168.31.101"
+    "start": "webpack-dev-server --open --mode development"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.21.0",
     "babel-plugin-styled-components": "^1.11.1",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
@@ -22,6 +23,8 @@
     "react-router-dom": "^5.2.0",
     "react-transition-group": "^4.4.1",
     "redux": "^4.0.5",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.3.0",
     "styled-components": "^5.2.1"
   },
   "devDependencies": {
