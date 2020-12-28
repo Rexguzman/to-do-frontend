@@ -61,7 +61,7 @@ export const deleteError = payload => ({
 
 export const registerUser = (payload, redirectUrl) => {
     return (dispatch) => {
-        axios.post('http://localhost:8000/auth/sign-up', payload).then(({data}) => dispatch(registerRequest(data))).then(()=>{
+        axios.post('https://to-do-ssr.vercel.app/auth/sign-up', payload).then(({data}) => dispatch(registerRequest(data))).then(()=>{
             window.location.href = redirectUrl
         }).catch(error => dispatch(setError(error)))
     }
@@ -70,7 +70,7 @@ export const registerUser = (payload, redirectUrl) => {
 export const loginUser = ({email,password}, redirectUrl) => {
     return (dispatch) => {
         axios({
-            url: 'http://localhost:8000/auth/sign-in',
+            url: 'https://to-do-ssr.vercel.app/auth/sign-in',
             method: 'post',
             auth: {
                 username: email,
