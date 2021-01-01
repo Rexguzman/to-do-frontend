@@ -60,14 +60,17 @@ export const StyledRegister = styled.section`
 
     input {
         height:40px;
-        border: none;
+        border: solid 1px ${({ theme }) => theme.primary};
         border-radius: 5px;
         margin: 10px 0px;
         padding-left:15px;
         background-color:${({ theme }) => theme.primary};
         color:${({ theme }) => theme.font};
-        box-shadow:0 10px 16px 0 rgba(0,0,0,0.1),0 6px 20px 0 rgba(0,0,0,0.1);
+    }
 
+    .email_input {
+        border: solid 1px ${({ emailError }) => (emailError ? 'red' : '${({ theme }) => theme.primary}')};
+        box-shadow: ${({ emailError }) => (emailError ? '0 7px 16px 0 rgba(255,0,0,0.3),0 6px 16px 0 rgba(255,0,0,0.3)' : '0 10px 16px 0 rgba(0,0,0,0.1),0 6px 20px 0 rgba(0,0,0,0.1)')};
     }
 
     section {
@@ -91,5 +94,13 @@ export const StyledRegister = styled.section`
     hr {
         color:white;
         width:80%;
+    }
+    span {
+        font-size: 15px;
+        color: red;
+    }
+
+    h4 {
+        color: ${({ theme }) => theme.font};
     }
 `

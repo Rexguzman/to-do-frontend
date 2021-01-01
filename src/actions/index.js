@@ -11,6 +11,8 @@ export const setComplete = (payload) => ({
 });
 
 export const loginRequest = (payload) => {
+
+    
     const info = {
         ...payload,
         isLogged: true,
@@ -21,17 +23,23 @@ export const loginRequest = (payload) => {
     };
 };
 
-export const logoutRequest = (payload) => ({
-    type: 'LOGOUT_REQUEST',
-    payload,
-});
+export const logoutRequest = (payload) => {
+    const info = {
+        ...payload,
+        isLogged: false,
+    };
+    return {
+        type: 'LOGOUT_REQUEST',
+        info,
+    };
+};
 
 export const registerRequest = (payload) => ({
     type: 'REGISTER_REQUEST',
     payload,
 });
 
-let idToDo = 0;
+const idToDo = 0;
 
 export const newToDo = (payload) => {
     const info = {
@@ -77,6 +85,10 @@ export const loginUser = ({email,password}, redirectUrl) => {
                 password
             }
         }).then(({data})=>{
+            sessionStorage.setItem('name', data.user.name)
+            sessionStorage.setItem('email', data.user.email)
+            sessionStorage.setItem('id', data.user.id)
+            sessionStorage.setItem('isLogged', Boolean("true"))
             document.cookie = `email=${data.user.email}`;
             document.cookie = `name=${data.user.name}`;
             document.cookie = `id=${data.user.id}`;

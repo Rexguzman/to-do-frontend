@@ -12,9 +12,24 @@ import { DeleteAlert, Loading } from '../../components';
 const Login = (props) => {
     const { error } = props;
 
+    
     const [form, setValues] = useState({
         email: '',
     });
+    const [emailError, setEmailError] = useState(false);
+    
+    useEffect(() => {
+        document
+            .getElementById('email_input')
+            .addEventListener('keydown', function (event) {
+                if (event.key == 'Backspace' && !form.email.includes('@')) {
+                    setEmailError(true);
+                }
+            });
+            if (form.email.includes('@')) {
+                setEmailError(false);
+            }
+    }, [form.email]);
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -26,15 +41,19 @@ const Login = (props) => {
     };
 
     const handleSubmit = (event) => {
-        setIsLoading(true);
-        event.preventDefault();
-        props.loginUser(form, '/#/profile');
+        if (emailError) {
+            event.preventDefault();
+        } else {
+            setIsLoading(true);
+            event.preventDefault();
+            props.loginUser(form, '/#/profile');
+        }
     };
 
     const [isError, setIsError] = useState(false);
 
     useEffect(() => {
-        if (error) {
+        if (error || emailError) {
             setIsLoading(false);
             setIsError(true);
         }
@@ -55,16 +74,19 @@ const Login = (props) => {
                 />
             ) : null}
             <StyledContainer>
-                <StyledLogin>
+                <StyledLogin emailError={emailError}>
                     <h1>BIENVENIDO</h1>
                     <form onSubmit={handleSubmit}>
                         <input
+                            id="email_input"
+                            className="email_input"
                             name="email"
                             type="text"
                             placeholder="Correo"
                             onChange={handleInput}
                             required
                         />
+                        {emailError ? <span>Correo invalido</span> : null}
                         <input
                             name="password"
                             type="password"
@@ -90,9 +112,7 @@ const Login = (props) => {
                     <p>¿Has olvidado la contraseña?</p>
                     <hr />
                     <Link to="/register">
-                    <button className="register_button">
-                        Regístrate
-                    </button>
+                        <button className="register_button">Regístrate</button>
                     </Link>
                 </StyledLogin>
             </StyledContainer>

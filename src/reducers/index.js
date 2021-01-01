@@ -22,9 +22,10 @@ const reducer = (state, action) => {
                 user: action.info,
             };
         case 'LOGOUT_REQUEST':
+            sessionStorage.clear()
             return {
                 ...state,
-                user: action.payload,
+                user: action.info,
             };
         case 'REGISTER_REQUEST':
             return {
@@ -37,16 +38,14 @@ const reducer = (state, action) => {
                 notes: [...state.notes, action.info],
             };
         case 'SET_ERROR':
-            let error = true;
             return {
                 ...state,
-                error: error,
+                error: true,
             };
         case 'DELETE_ERROR':
-            error = false;
             return {
                 ...state,
-                error: error,
+                error: false,
             };
         case 'EDIT_TO_DO':
             state.notes.find((items) => items.id == action.payload.id).title =

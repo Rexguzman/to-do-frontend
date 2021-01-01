@@ -22,17 +22,19 @@ const Register = (props) => {
 
     const handleInput = (event) => {
         setValue({
-            form: {
-                ...form,
-                [event.target.name]: event.target.value,
-            },
+            ...form,
+            [event.target.name]: event.target.value,
         });
     };
 
     const handleSubmit = (event) => {
-        setIsLoading(true);
-        event.preventDefault();
-        props.registerUser(form, '/#/login');
+        if (emailError) {
+            event.preventDefault();
+        } else {
+            setIsLoading(true);
+            event.preventDefault();
+            props.registerUser(form, '/#/login');
+        }
     };
 
     const [isError, setIsError] = useState(false);
@@ -49,6 +51,21 @@ const Register = (props) => {
         props.deleteError();
     };
 
+    const [emailError, setEmailError] = useState(false);
+
+    useEffect(() => {
+        document
+            .getElementById('email_input')
+            .addEventListener('keydown', function (event) {
+                if (event.key == 'Backspace' && event.key == 'Delete' && !form.email.includes('@')) {
+                    setEmailError(true);
+                }
+            });
+        if (form.email.includes('@')) {
+            setEmailError(false);
+        }
+    }, [form.email]);
+
     return (
         <React.Fragment>
             {isLoading ? <Loading /> : null}
@@ -59,7 +76,7 @@ const Register = (props) => {
                 />
             ) : null}
             <StyledContainer>
-                <StyledRegister>
+                <StyledRegister emailError={emailError}>
                     <h1>REGISTRO</h1>
                     <form onSubmit={handleSubmit}>
                         <input
@@ -70,12 +87,15 @@ const Register = (props) => {
                             onChange={handleInput}
                         />
                         <input
+                            id="email_input"
+                            className="email_input"
                             name="email"
                             type="text"
                             placeholder="Correo"
                             required
                             onChange={handleInput}
                         />
+                        {emailError ? <span>Correo invalido</span> : null}
                         <input
                             name="password"
                             type="password"
@@ -87,7 +107,7 @@ const Register = (props) => {
                             Registarse
                         </button>
                     </form>
-                    <Link to="/login">¿Ya tienes cuenta??</Link>
+                    <Link to="/login"><h4>¿Ya tienes cuenta?</h4></Link>
                 </StyledRegister>
             </StyledContainer>
         </React.Fragment>
