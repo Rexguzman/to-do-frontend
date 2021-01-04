@@ -13,7 +13,7 @@ export const lightTheme = {
     secundary: '#3A3A3A',
     font: '#FFFFFF',
     tablet: '780px',
-    mobile: '480px',
+    mobile: '500px',
     transform: 'translateX(0px)',
     hover: '#0B94F6',
   }

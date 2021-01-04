@@ -22,7 +22,7 @@ const reducer = (state, action) => {
                 user: action.info,
             };
         case 'LOGOUT_REQUEST':
-            sessionStorage.clear()
+            sessionStorage.clear();
             return {
                 ...state,
                 user: action.info,

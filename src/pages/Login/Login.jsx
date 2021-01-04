@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { loginUser, deleteError } from '../../actions';
+import { loginUser, deleteError, googleLogin } from '../../actions';
 
 import { Link } from 'react-router-dom';
 import { StyledLogin } from './Login.styled';
@@ -64,6 +64,11 @@ const Login = (props) => {
         props.deleteError();
     };
 
+    const handleGoogleLogin = (event) =>{
+        event.preventDefault()
+        props.googleLogin('/#/profile')
+    }
+
     return (
         <React.Fragment>
             {isLoading ? <Loading /> : null}
@@ -98,14 +103,14 @@ const Login = (props) => {
                             Iniciar Sesión
                         </button>
                     </form>
-                    <section>
+                    <section onSubmit={handleGoogleLogin} className="google_auth">
                         <figure>
                             <img
                                 src="https://img.icons8.com/color/452/google-logo.png"
                                 alt="Google icon"
                             />
                         </figure>
-                        <button className="google_button">
+                        <button className="google_button" type="submit">
                             Continuar con Google
                         </button>
                     </section>
@@ -129,6 +134,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
     loginUser,
     deleteError,
+    googleLogin
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

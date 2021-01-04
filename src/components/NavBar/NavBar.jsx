@@ -41,7 +41,7 @@ const NavBar = ({ toDos, economy, profile, user }) => {
                     </figure>
                     <div>
                         <h3>Perfil</h3>
-                        <h3 className="user_name">Rex Guzmán</h3>
+                        <h3 className="user_name">{user.name}</h3>
                     </div>
                 </Link>
             </StyledElement>
@@ -89,7 +89,7 @@ const NavBar = ({ toDos, economy, profile, user }) => {
 
 const mapStateToProps = (state) => {
     return {
-        notes: state.notes,
+        user: state.user,
     };
 };
 
