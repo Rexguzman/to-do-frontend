@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
-import { deleteNote, setComplete, editToDo } from '../../actions';
+import { deleteToDoUser, updateCompleted, updateToDoUser } from '../../actions';
 
 import ConfirmationAlert from '../ConfirmationAlert';
 import { StyledToDoItem } from './ToDoItem.styled';
@@ -9,27 +9,29 @@ import { useIsOpen } from '../../hooks/useIsOpen';
 
 const ToDoItem = props => {
 
-    const {id, title, description, completed} = props;
+    const {title, description, completed, _id, user} = props;
 
     const open = useIsOpen(); //Hook para el manejo de estado del botón de borrar
 
     const [isEditable, useIsEditable] = useState(false); //Hook para el manejo de esta del botón de editar
 
     const handlerDeleteNote = (itemId) => {
-        props.deleteNote(itemId)
+        props.deleteToDoUser(itemId)
     }
 
     const handlerSetComplete = (completed, itemId) => {
-        props.setComplete({
+        props.updateCompleted({
             completed:!completed,
-            id: itemId,
+            _id: itemId,
+            userId : user.id,
         })
     }
 
     //---------------------> input
 
     const [form, setValues] = useState({
-        id:id,
+        _id:_id,
+        userId: user.id,
         title: title,
         description:description,
         completed:completed,
@@ -44,7 +46,7 @@ const ToDoItem = props => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        props.editToDo(form);
+        props.updateToDoUser(form);
         useIsEditable(false);
     }
 
@@ -61,13 +63,13 @@ const ToDoItem = props => {
                     </section>
                     <section className="icons_container">
                         {completed ? 
-                            <figure onClick={() => handlerSetComplete(completed,id)} className="uncheck_icon">
+                            <figure onClick={() => handlerSetComplete(completed,_id)} className="uncheck_icon">
                                 <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check-circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                     <path fill="currentColor" d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path>
                                 </svg>
                             </figure>
                         :
-                            <figure onClick={() => handlerSetComplete(completed,id)} className="check_icon">
+                            <figure onClick={() => handlerSetComplete(completed,_id)} className="check_icon">
                                 <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                     <path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200z"></path>
                                 </svg>
@@ -86,7 +88,7 @@ const ToDoItem = props => {
                     </section>
                     </div>
                 </StyledToDoItem>
-                    <ConfirmationAlert open={open} id={id} handlerDeleteNote={handlerDeleteNote}/>
+                    <ConfirmationAlert open={open} _id={_id} handlerDeleteNote={handlerDeleteNote}/>
             </React.Fragment>
         )
     }else {
@@ -144,11 +146,16 @@ const ToDoItem = props => {
     }
 
 }
+const mapStateToProps = state => {
+    return {
+      user: state.user,
+    };
+  };
 
 const mapDispatchToProps = {
-    deleteNote,
-    setComplete,
-    editToDo,
+    deleteToDoUser,
+    updateCompleted,
+    updateToDoUser,
 }
 
-export default connect(null, mapDispatchToProps)(ToDoItem);
+export default connect(mapStateToProps, mapDispatchToProps)(ToDoItem);

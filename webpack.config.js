@@ -7,7 +7,6 @@ module.exports = {
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: 'bundle.js',
-      publicPath: '/to-do-frontend/'
     },
     resolve: {
       extensions: ['.js', '.jsx'],

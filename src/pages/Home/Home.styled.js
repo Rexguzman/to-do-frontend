@@ -11,6 +11,10 @@ export const StyledItemContainer = styled.section`
     width: -moz-available;
     margin-right: 20px;
 
+    .empty_to_dos {
+        text-align: center;
+    }
+
     @media (max-width: ${({ theme }) => theme.tablet}) {
         margin-left: 80px;
     }

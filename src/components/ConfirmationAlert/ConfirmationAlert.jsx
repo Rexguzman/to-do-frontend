@@ -4,7 +4,7 @@ import { StyledConfirmationAlert } from './ConfirmationAlert.styled';
 import {CSSTransition} from 'react-transition-group'
 
 const ConfirmationAlert = (props) => {
-    const { id, open, handlerDeleteNote } = props;
+    const { _id, open, handlerDeleteNote } = props;
 
     return open.isOpen
         ? ReactDOM.createPortal(
@@ -37,7 +37,7 @@ const ConfirmationAlert = (props) => {
                         <h1>Eliminar Nota</h1>
                         <p>¿Estas seguro que quieres eliminar esta nota?</p>
                         <p>no podras recuperarla</p>
-                        <button onClick={() => handlerDeleteNote(id)}>
+                        <button onClick={() => handlerDeleteNote(_id)}>
                             Eliminar
                         </button>
                     </section>

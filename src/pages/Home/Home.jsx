@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
+import { toDoRequest } from '../../actions';
 
 import { NavBar, PlusIcon, SearchBar, ToDoItem } from '../../components';
 import { StyledDashboardContainer, StyledItemContainer } from './Home.styled';
@@ -9,18 +10,33 @@ import NewToDoForm from '../../components/NewToDoForm';
 import { useIsOpen } from '../../hooks/useIsOpen';
 import useFilter from '../../hooks/useFilter'
 
-const Home = ({ notes }) => {
+const Home = (props) => {
+
+    const {notes, user} = props
+
     const open = useIsOpen();
     const filtered = useFilter(notes);
 
+    
+    const handleToDos = () => {
+        props.toDoRequest(user.id);
+    }
+    useEffect(() => {
+        handleToDos()
+    },[notes])
+    
     return (
         <StyledDashboardContainer>
             <NavBar toDos={'select_item'} />
             <StyledItemContainer>
                 <SearchBar filtered={filtered}/>
+                {
+                    (notes.length == 0) ? <h3 className="empty_to_dos">Aun no tienes tareas</h3> : null
+                }
                 <section>
-                    {filtered.filteredResults.map((item) => (
-                        <ToDoItem key={item.id} {...item} />
+                    {
+                    filtered.filteredResults.map((item) => (
+                        <ToDoItem key={item._id} {...item} />
                     ))}
                 </section>
                 <figure onClick={() => open.handleClick()}>
@@ -35,7 +51,12 @@ const Home = ({ notes }) => {
 const mapStateToProps = (state) => {
     return {
         notes: state.notes,
+        user: state.user
     };
 };
 
-export default connect(mapStateToProps, null)(Home);
+const mapDispatchToProps = {
+    toDoRequest,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

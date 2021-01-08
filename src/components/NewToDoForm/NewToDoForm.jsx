@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 
-import { newToDo } from '../../actions';
+import { newToDoUser } from '../../actions';
 
 import {CSSTransition} from 'react-transition-group'
 import { StyledNewToDoForm } from './NewToDoForm.styled';
 
 const NewToDoForm = (props) => {
-    const { open } = props;
+    const { open, user } = props;
 
     const [form, setValues] = useState({
+        userId: user.id,
         title: '',
         description: '',
         completed: false,
@@ -25,7 +26,7 @@ const NewToDoForm = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        props.newToDo(form);
+        props.newToDoUser(form);
         setValues({ title: '', description: '', completed: false });
         open.handleClick();
     };
@@ -74,8 +75,14 @@ const NewToDoForm = (props) => {
         : null);
 };
 
-const mapDispatchToProps = {
-    newToDo,
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    };
 };
 
-export default connect(null, mapDispatchToProps)(NewToDoForm);
+const mapDispatchToProps = {
+    newToDoUser,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewToDoForm);
