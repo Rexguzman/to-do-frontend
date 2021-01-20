@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import { StyledConfirmationAlert } from './DeleteAlert.styled';
 import { CSSTransition } from 'react-transition-group';
@@ -40,5 +41,10 @@ const DeleteAlert = (props) => {
           )
         : null;
 };
+
+DeleteAlert.propTypes = {
+    isError: PropTypes.bool,
+    handleAcceptError: PropTypes.func,
+}
 
 export default DeleteAlert;

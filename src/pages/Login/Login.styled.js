@@ -53,7 +53,7 @@ export const StyledLogin = styled.section`
         color: white;
     }
 
-    form {
+    .login_form {
         display: flex;
         flex-direction: column;
         width: 80%;
@@ -77,7 +77,7 @@ export const StyledLogin = styled.section`
                 : '0 10px 16px 0 rgba(0,0,0,0.1),0 6px 20px 0 rgba(0,0,0,0.1)'};
     }
 
-    section {
+    .google_auth {
         display: flex;
         width: 80%;
 

@@ -1,7 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { StyledToggleButton } from './ToggleButton.styled';
 
-const ToggleButton = ({ toggleTheme }) => {
+const ToggleButton = props => {
+    const { toggleTheme } = props
+
     return (
         <React.Fragment>
             <StyledToggleButton>
@@ -24,5 +27,9 @@ const ToggleButton = ({ toggleTheme }) => {
         </React.Fragment>
     );
 };
+
+ToggleButton.propTypes = {
+    toggleTheme: PropTypes.func,
+}
 
 export default ToggleButton;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutRequest } from "../../actions";
 
@@ -8,14 +9,13 @@ import { StyledProfileContainer, StyledItemContainer } from './Profile.styled';
 
 const Profile = (props) => {
 
-    const {user} = props
+    const {user, logoutRequest} = props
 
     const handleLogout = () => {
         document.cookie = "email=";
         document.cookie = "name=";
         document.cookie = "id=";
-        document.cookie = "token=";
-        props.logoutRequest({});
+        logoutRequest({});
         window.location.href = '/#/login'
 
     }
@@ -84,6 +84,11 @@ const Profile = (props) => {
         </StyledDashboardContainer>
     );
 };
+
+Profile.propTypes = {
+    user: PropTypes.object,
+    logoutRequest: PropTypes.func,
+}
 
 const mapStateToProps = state => {
     return {

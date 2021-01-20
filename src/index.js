@@ -22,9 +22,7 @@ const initialState = {
         id: sessionState.id,
         isLogged: sessionState.isLogged,
     },
-    notes: [
-        
-    ],
+    notes: [],
     error: false,
 };
 

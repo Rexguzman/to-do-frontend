@@ -1,11 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import { StyledConfirmationAlert } from './ConfirmationAlert.styled';
 import {CSSTransition} from 'react-transition-group'
 
-const ConfirmationAlert = (props) => {
+const ConfirmationAlert = props => {
     const { _id, open, handlerDeleteNote } = props;
-
     return open.isOpen
         ? ReactDOM.createPortal(
               <StyledConfirmationAlert>
@@ -47,5 +47,11 @@ const ConfirmationAlert = (props) => {
           )
         : null;
 };
+
+ConfirmationAlert.propTypes = {
+    _id: PropTypes.string,
+    open: PropTypes.object,
+    handlerDeleteNote: PropTypes.func,
+}
 
 export default ConfirmationAlert;

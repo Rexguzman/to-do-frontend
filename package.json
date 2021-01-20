@@ -9,13 +9,14 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "build": "webpack --mode production",
-    "start": "webpack-dev-server --open --mode development --host 192.168.31.101"
+    "start": "webpack-dev-server --open --mode development"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.1",
+    "prop-types": "^15.7.2",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-redux": "^7.2.2",

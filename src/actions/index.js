@@ -92,7 +92,6 @@ export const loginUser = ({ email, password }, redirectUrl) => {
                 document.cookie = `email=${data.user.email}`;
                 document.cookie = `name=${data.user.name}`;
                 document.cookie = `id=${data.user.id}`;
-                document.cookie = `token=${data.user.token}`;
                 dispatch(loginRequest(data.user));
             })
             .then(() => {
@@ -103,21 +102,16 @@ export const loginUser = ({ email, password }, redirectUrl) => {
 };
 
 export const googleLogin = (redirectUrl) => {
-    return (dispatch) => {
-        axios({
-            url: 'https://to-do-ssr.rexguzman.vercel.app/auth/google-oauth',
-            method: 'get',
-        })
-            .then((results) => {
-                window.open(results.config.url);
-                console.log(results);
-            })
-            .then((googleResponse) => {
-                console.log(googleResponse);
-            })
-            .catch((error) => dispatch(setError(error)));
-    };
+    return (dispatch) => {};
 };
+
+//const win = window.open('http://localhost:8000/auth/google-oauth', 'google',"height=800,width=600,modal=yes,alwaysRaised=yes");
+//      const timer = setInterval(function() {
+//        if (win.closed) {
+//          clearInterval(timer);
+//        alert("'Secure Payment' window closed !");
+//  }
+//}, 500);
 
 export const toDoRequest = (userId) => {
     return (dispatch) => {
@@ -137,12 +131,12 @@ export const toDoListed = (payload) => ({
     payload,
 });
 
-export const newToDoUser = (payload) => {
+export const newUserToDo = (payload) => {
     return (dispatch) => {
         axios
             .post('https://to-do-ssr.rexguzman.vercel.app/user-to-dos', payload)
             .then(({ data }) => {
-                dispatch(newToDo(data))
+                dispatch(newToDo(data));
             })
             .catch((error) => dispatch(setError(error)));
     };
@@ -150,31 +144,38 @@ export const newToDoUser = (payload) => {
 
 export const deleteToDoUser = (toDoId) => {
     return (dispatch) => {
-        axios.delete(`https://to-do-ssr.rexguzman.vercel.app/user-to-dos/${toDoId}`).then(({data})=>{
-            dispatch(deleteToDo(data.data))
-        }).catch((error) => dispatch(setError(error)));
-    }
-}
+        axios
+            .delete(
+                `https://to-do-ssr.rexguzman.vercel.app/user-to-dos/${toDoId}`
+            )
+            .then(({ data }) => {
+                dispatch(deleteToDo(data.data));
+            })
+            .catch((error) => dispatch(setError(error)));
+    };
+};
 
 export const updateToDoUser = (payload) => {
     return (dispatch) => {
         axios
             .put('https://to-do-ssr.rexguzman.vercel.app/user-to-dos', payload)
             .then(({ data }) => {
-                console.log(payload)
-                dispatch(editToDo(data.data))
+                dispatch(editToDo(data.data));
             })
             .catch((error) => dispatch(setError(error)));
     };
-}
+};
 
 export const updateCompleted = (payload) => {
     return (dispatch) => {
         axios
-            .put('https://to-do-ssr.rexguzman.vercel.app/user-to-dos/completed', payload)
+            .put(
+                'https://to-do-ssr.rexguzman.vercel.app/user-to-dos/completed',
+                payload
+            )
             .then(({ data }) => {
-                dispatch(setComplete(data.data))
+                dispatch(setComplete(data.data));
             })
             .catch((error) => dispatch(setError(error)));
     };
-}
+};

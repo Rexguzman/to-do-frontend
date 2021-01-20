@@ -1,7 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { StyledSearchBar } from './SearchBar.styled';
 
-const SearchBar = ({ filtered }) => {
+const SearchBar = props => {
+    const { filtered } = props
+
     return (
         <StyledSearchBar>
             <figure>
@@ -32,5 +35,9 @@ const SearchBar = ({ filtered }) => {
         </StyledSearchBar>
     );
 };
+
+SearchBar.propTypes = {
+    filtered: PropTypes.object,
+}
 
 export default SearchBar;

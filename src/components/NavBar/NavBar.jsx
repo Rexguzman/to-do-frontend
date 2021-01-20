@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
@@ -8,7 +9,9 @@ import {
 } from './NavBar.styled';
 import { useOnClickOutside } from '../../hooks/useOnClickOutside';
 
-const NavBar = ({ toDos, economy, profile, user }) => {
+const NavBar = props => {
+    const { toDos, economy, profile, user } = props
+
     const [isShown, setIsShown] = useState(false);
     const [open, setOpen] = useState(false);
     const node = useRef();
@@ -86,6 +89,13 @@ const NavBar = ({ toDos, economy, profile, user }) => {
         </StyledNavBarContainer>
     );
 };
+
+NavBar.propTypes = {
+    toDos: PropTypes.string,
+    economy: PropTypes.string,
+    profile: PropTypes.string,
+    user: PropTypes.object,
+}
 
 const mapStateToProps = (state) => {
     return {

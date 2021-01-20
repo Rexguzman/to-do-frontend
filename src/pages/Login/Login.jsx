@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 
 import { loginUser, deleteError, googleLogin } from '../../actions';
@@ -10,12 +11,34 @@ import { StyledContainer } from '../../style/global';
 import { DeleteAlert, Loading } from '../../components';
 
 const Login = (props) => {
-    const { error } = props;
 
+    const { error, loginUser, deleteError, googleLogin } = props;
+
+    //-----------> Form logic
     
     const [form, setValues] = useState({
         email: '',
     });
+    
+    const handleInput = (event) => {
+        setValues({
+            ...form,
+            [event.target.name]: event.target.value,
+        });
+    };
+    
+    const handleSubmit = (event) => {
+        if (emailError) {
+            event.preventDefault();
+        } else {
+            setIsLoading(true);
+            event.preventDefault();
+            loginUser(form, '/#/profile');
+        }
+    };
+
+    //-----------> Email error
+
     const [emailError, setEmailError] = useState(false);
     
     useEffect(() => {
@@ -31,26 +54,14 @@ const Login = (props) => {
             }
     }, [form.email]);
 
-    const [isLoading, setIsLoading] = useState(false);
-
-    const handleInput = (event) => {
-        setValues({
-            ...form,
-            [event.target.name]: event.target.value,
-        });
-    };
-
-    const handleSubmit = (event) => {
-        if (emailError) {
-            event.preventDefault();
-        } else {
-            setIsLoading(true);
-            event.preventDefault();
-            props.loginUser(form, '/#/profile');
-        }
-    };
-
+    //-----------> Redux Errors
+    
     const [isError, setIsError] = useState(false);
+    
+    const handleAcceptError = () => {
+        setIsError(false);
+        deleteError();
+    };
 
     useEffect(() => {
         if (error || emailError) {
@@ -58,15 +69,16 @@ const Login = (props) => {
             setIsError(true);
         }
     }, [error]);
+    
+    //-----------> Loading State
+    
+    const [isLoading, setIsLoading] = useState(false);
 
-    const handleAcceptError = () => {
-        setIsError(false);
-        props.deleteError();
-    };
+    //-----------> Google logic
 
     const handleGoogleLogin = (event) =>{
         event.preventDefault()
-        props.googleLogin('/#/profile')
+        googleLogin('/#/profile')
     }
 
     return (
@@ -81,7 +93,7 @@ const Login = (props) => {
             <StyledContainer>
                 <StyledLogin emailError={emailError}>
                     <h1>BIENVENIDO</h1>
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit} className="login_form">
                         <input
                             id="email_input"
                             className="email_input"
@@ -103,7 +115,7 @@ const Login = (props) => {
                             Iniciar Sesión
                         </button>
                     </form>
-                    <section onSubmit={handleGoogleLogin} className="google_auth">
+                    <form onSubmit={handleGoogleLogin} className="google_auth">
                         <figure>
                             <img
                                 src="https://img.icons8.com/color/452/google-logo.png"
@@ -113,7 +125,7 @@ const Login = (props) => {
                         <button className="google_button" type="submit">
                             Continuar con Google
                         </button>
-                    </section>
+                    </form>
                     <p>¿Has olvidado la contraseña?</p>
                     <hr />
                     <Link to="/register">
@@ -124,6 +136,14 @@ const Login = (props) => {
         </React.Fragment>
     );
 };
+
+
+Login.propTypes = {
+    error: PropTypes.bool,
+    loginUser: PropTypes.func,
+    deleteError: PropTypes.func,
+    googleLogin: PropTypes.func,
+}
 
 const mapStateToProps = (state) => {
     return {
