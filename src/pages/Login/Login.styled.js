@@ -79,7 +79,7 @@ export const StyledLogin = styled.section`
 
     .google_auth {
         display: flex;
-        width: 80%;
+        width: 100%;
 
         figure {
             margin: 0;

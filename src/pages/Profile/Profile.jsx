@@ -27,8 +27,7 @@ const Profile = (props) => {
                 <StyledProfileContainer>
                     <div className="user_pic">
                         <img
-                            src="http://begmetobuyit.com/application/css/images/noImage.jpg"
-                            alt="user profile pic"
+                           
                         />
                     </div>
                     <div className="profile_item_container">

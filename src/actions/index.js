@@ -1,5 +1,8 @@
 import axios from 'axios';
 
+const ssrUrl = 'https://to-do-ssr.rexguzman.vercel.app';
+const localUrl = 'http://localhost:8000';
+
 export const deleteToDo = (payload) => ({
     type: 'DELETE_TO_DO',
     payload,
@@ -63,7 +66,7 @@ export const registerUser = (payload, redirectUrl) => {
     return (dispatch) => {
         axios
             .post(
-                'https://to-do-ssr.rexguzman.vercel.app/auth/sign-up',
+                `${localUrl}/auth/sign-up`,
                 payload
             )
             .then(({ data }) => dispatch(registerRequest(data)))
@@ -77,7 +80,7 @@ export const registerUser = (payload, redirectUrl) => {
 export const loginUser = ({ email, password }, redirectUrl) => {
     return (dispatch) => {
         axios({
-            url: 'https://to-do-ssr.rexguzman.vercel.app/auth/sign-in',
+            url: `${localUrl}/auth/sign-in`,
             method: 'post',
             auth: {
                 username: email,
@@ -85,6 +88,7 @@ export const loginUser = ({ email, password }, redirectUrl) => {
             },
         })
             .then(({ data }) => {
+                console.log(data.token);
                 sessionStorage.setItem('name', data.user.name);
                 sessionStorage.setItem('email', data.user.email);
                 sessionStorage.setItem('id', data.user.id);
@@ -92,6 +96,7 @@ export const loginUser = ({ email, password }, redirectUrl) => {
                 document.cookie = `email=${data.user.email}`;
                 document.cookie = `name=${data.user.name}`;
                 document.cookie = `id=${data.user.id}`;
+                document.cookie = `token=${data.token}`;
                 dispatch(loginRequest(data.user));
             })
             .then(() => {
@@ -102,7 +107,33 @@ export const loginUser = ({ email, password }, redirectUrl) => {
 };
 
 export const googleLogin = (redirectUrl) => {
-    return (dispatch) => {};
+    return (dispatch) => {
+        axios({
+            url: `${localUrl}/auth/success`,
+            method: 'get',
+            withCredentials: true,
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Credentials": true,
+            },
+        })
+            .then(({ data }) => {
+                sessionStorage.setItem('name', data.user.name);
+                sessionStorage.setItem('email', data.user.email);
+                sessionStorage.setItem('id', data.user.id);
+                sessionStorage.setItem('isLogged', Boolean('true'));
+                document.cookie = `email=${data.user.email}`;
+                document.cookie = `name=${data.user.name}`;
+                document.cookie = `id=${data.user.id}`;
+                document.cookie = `token=${data.token}`;
+                dispatch(loginRequest(data.user));
+            })
+            .then(() => {
+                window.location.href = redirectUrl;
+            })
+            .catch((error) => dispatch(setError(error)));
+    };
 };
 
 //const win = window.open('http://localhost:8000/auth/google-oauth', 'google',"height=800,width=600,modal=yes,alwaysRaised=yes");
@@ -116,8 +147,9 @@ export const googleLogin = (redirectUrl) => {
 export const toDoRequest = (userId) => {
     return (dispatch) => {
         axios({
-            url: `https://to-do-ssr.rexguzman.vercel.app/to-dos/${userId}`,
+            url: `${localUrl}/to-dos/${userId}`,
             method: 'get',
+            //withCredentials: true,
         })
             .then(({ data }) => {
                 dispatch(toDoListed(data.data));
@@ -133,8 +165,12 @@ export const toDoListed = (payload) => ({
 
 export const newUserToDo = (payload) => {
     return (dispatch) => {
-        axios
-            .post('https://to-do-ssr.rexguzman.vercel.app/user-to-dos', payload)
+        axios({
+            url: `${localUrl}/user-to-dos`,
+            method: 'post',
+            data: payload,
+            //withCredentials: true,
+        })
             .then(({ data }) => {
                 dispatch(newToDo(data));
             })
@@ -144,10 +180,11 @@ export const newUserToDo = (payload) => {
 
 export const deleteToDoUser = (toDoId) => {
     return (dispatch) => {
-        axios
-            .delete(
-                `https://to-do-ssr.rexguzman.vercel.app/user-to-dos/${toDoId}`
-            )
+        axios({
+            url: `${localUrl}/user-to-dos/${toDoId}`,
+            method: 'delete',
+            //withCredentials: true,
+        })
             .then(({ data }) => {
                 dispatch(deleteToDo(data.data));
             })
@@ -157,8 +194,12 @@ export const deleteToDoUser = (toDoId) => {
 
 export const updateToDoUser = (payload) => {
     return (dispatch) => {
-        axios
-            .put('https://to-do-ssr.rexguzman.vercel.app/user-to-dos', payload)
+        axios({
+            url: `${localUrl}/user-to-dos`,
+            method: 'put',
+            data: payload,
+           //withCredentials: true,
+        })
             .then(({ data }) => {
                 dispatch(editToDo(data.data));
             })
@@ -168,11 +209,12 @@ export const updateToDoUser = (payload) => {
 
 export const updateCompleted = (payload) => {
     return (dispatch) => {
-        axios
-            .put(
-                'https://to-do-ssr.rexguzman.vercel.app/user-to-dos/completed',
-                payload
-            )
+        axios({
+            url: `${localUrl}/user-to-dos/completed`,
+            method: 'put',
+            data: payload,
+            //withCredentials: true,
+        })
             .then(({ data }) => {
                 dispatch(setComplete(data.data));
             })

@@ -115,17 +115,19 @@ const Login = (props) => {
                             Iniciar Sesión
                         </button>
                     </form>
-                    <form onSubmit={handleGoogleLogin} className="google_auth">
+                    <a href="http://localhost:8000/auth/google-oauth">
+                    <section className="google_auth">
                         <figure>
                             <img
                                 src="https://img.icons8.com/color/452/google-logo.png"
                                 alt="Google icon"
                             />
                         </figure>
-                        <button className="google_button" type="submit">
+                        <button className="google_button">
                             Continuar con Google
                         </button>
-                    </form>
+                    </section>
+                    </a>
                     <p>¿Has olvidado la contraseña?</p>
                     <hr />
                     <Link to="/register">

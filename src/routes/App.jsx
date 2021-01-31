@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 
 import Layout from '../layout/Layout';
 
-import { Economy, Home, Login, Register, Profile, Error404 } from '../pages';
+import { Economy, Home, Login, Register, Profile, Error404, GoogleAuth } from '../pages';
 
 const App = ({ user }) => {
     const [isLogged, setIsLogged] = useState(false);
@@ -36,6 +36,7 @@ const App = ({ user }) => {
                     <Route exact path="/economy">
                         {isLogged ? <Economy /> : <Redirect to="/login" />}
                     </Route>
+                    <Route exact path="/Google/Auth" component={GoogleAuth}/>
                     <Route component={Error404} />
                 </Switch>
             </Layout>
