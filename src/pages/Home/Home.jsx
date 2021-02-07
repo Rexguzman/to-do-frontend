@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { toDoRequest } from '../../actions';
 
-import { NavBar, PlusIcon, SearchBar, ToDoItem } from '../../components';
+import { Loading, NavBar, PlusIcon, SearchBar, ToDoItem } from '../../components';
 import { StyledDashboardContainer, StyledItemContainer } from './Home.styled';
 import NewToDoForm from '../../components/NewToDoForm';
 

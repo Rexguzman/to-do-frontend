@@ -5,3 +5,4 @@ export { default as Economy } from './Economy';
 export { default as Profile } from './Profile';
 export { default as Error404 } from './Error404';
 export { default as GoogleAuth } from './GoogleAuth';
+export { default as EmailConfirm } from './EmailConfirm';

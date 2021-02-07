@@ -12,6 +12,7 @@ const sessionState = {
     name: sessionStorage.getItem('name'),
     email: sessionStorage.getItem('email'),
     id: sessionStorage.getItem('id'),
+    verifiedEmail: !!sessionStorage.getItem('verifiedEmail'),
     isLogged: !!sessionStorage.getItem('isLogged'),
 };
 
@@ -20,6 +21,7 @@ const initialState = {
         name: sessionState.name,
         email: sessionState.email,
         id: sessionState.id,
+        verifiedEmail: sessionState.verifiedEmail,
         isLogged: sessionState.isLogged,
     },
     notes: [],

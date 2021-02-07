@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const ssrUrl = 'https://to-do-ssr.rexguzman.vercel.app';
+//const localUrl = 'https://to-do-ssr.rexguzman.vercel.app';
 const localUrl = 'http://localhost:8000';
 
 export const deleteToDo = (payload) => ({
@@ -88,14 +88,15 @@ export const loginUser = ({ email, password }, redirectUrl) => {
             },
         })
             .then(({ data }) => {
-                console.log(data.token);
                 sessionStorage.setItem('name', data.user.name);
                 sessionStorage.setItem('email', data.user.email);
                 sessionStorage.setItem('id', data.user.id);
+                sessionStorage.setItem('verifiedEmail', Boolean(data.user.verifiedEmail));
                 sessionStorage.setItem('isLogged', Boolean('true'));
                 document.cookie = `email=${data.user.email}`;
                 document.cookie = `name=${data.user.name}`;
                 document.cookie = `id=${data.user.id}`;
+                document.cookie = `verifiedEmail=${data.user.verifiedEmail}`;
                 document.cookie = `token=${data.token}`;
                 dispatch(loginRequest(data.user));
             })
@@ -122,10 +123,12 @@ export const googleLogin = (redirectUrl) => {
                 sessionStorage.setItem('name', data.user.name);
                 sessionStorage.setItem('email', data.user.email);
                 sessionStorage.setItem('id', data.user.id);
+                sessionStorage.setItem('verifiedEmail', data.user.verifiedEmail);
                 sessionStorage.setItem('isLogged', Boolean('true'));
                 document.cookie = `email=${data.user.email}`;
                 document.cookie = `name=${data.user.name}`;
                 document.cookie = `id=${data.user.id}`;
+                document.cookie = `verifiedEmail=${data.user.verifiedEmail}`;
                 document.cookie = `token=${data.token}`;
                 dispatch(loginRequest(data.user));
             })

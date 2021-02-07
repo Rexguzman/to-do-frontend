@@ -6,14 +6,14 @@ export const StyledProfileContainer = styled.section`
     align-items: center;
     justify-content: center;
 
-    .user_pic {
+    .user_pic_container {
         display: block;
         margin: 65px 0;
         width: 200px;
 
-        img {
+        .user_pic {
             width: inherit;
-            border-radius: 50%;
+            height: inherit;
         }
     }
 
@@ -31,6 +31,7 @@ export const StyledProfileContainer = styled.section`
         width: 300px;
         background-color: ${({ theme }) => theme.secundary};
         padding: 0 25px;
+        overflow-wrap: break-word;
     }
 
     button {

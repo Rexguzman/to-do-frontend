@@ -43,4 +43,5 @@ export const StyledContainer = styled.section`
     justify-content:center;
     align-items:content;
     height:100vh;
+    align-items: center;
 `
