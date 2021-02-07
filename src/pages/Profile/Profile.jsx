@@ -8,6 +8,8 @@ import { NavBar } from '../../components';
 import { StyledDashboardContainer } from '../Economy/Economy.styled';
 import { StyledProfileContainer, StyledItemContainer } from './Profile.styled';
 
+import config from '../../config';
+
 const Profile = (props) => {
     const { user, logoutRequest } = props;
 
@@ -16,7 +18,7 @@ const Profile = (props) => {
         document.cookie = 'name=';
         document.cookie = 'id=';
         logoutRequest({});
-        window.location.href = '/#/login';
+        window.location.href = `${config.devUrl}/login`;
     };
 
     const handleEmailConfirm = () => {

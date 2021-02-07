@@ -7,7 +7,7 @@ import { StyledConfirmEmailContainer } from './EmailConfirm.styled'
 import { Link, useParams } from 'react-router-dom';
 import { Loading } from '../../components';
 
-
+import config from '../../config';
 
 const EmailConfirm = () => {
     const [status, setStatus] = useState('loading');
@@ -15,7 +15,7 @@ const EmailConfirm = () => {
 
     useEffect(()=>{
         axios({
-            url: `https://to-do-api.rexguzman.vercel.app/email/verify/confirm/${id}`,
+            url: `${config.apiProductionUrl}/email/verify/confirm/${id}`,
             method: "get",
         }).then((response)=> {
             if(response.status == 200){
@@ -40,7 +40,7 @@ const EmailConfirm = () => {
                 <StyledConfirmEmailContainer>
                     <h1>Ups hubo un error</h1>
                     <p>Algo salio mal</p>
-                    <Link to="/#/"><button>Iniciar Sesión</button></Link>
+                    <Link to={config.devUrl}><button>Iniciar Sesión</button></Link>
                 </StyledConfirmEmailContainer>
             </StyledContainer>
         )
@@ -50,7 +50,7 @@ const EmailConfirm = () => {
                 <StyledConfirmEmailContainer>
                     <h1>¡Muchas Gracias!</h1>
                     <p>Hemos confirmado extitosamente tu email</p>
-                    <Link to="/#/"><button>Iniciar Sesión</button></Link>
+                    <Link to={config.devUrl}><button>Iniciar Sesión</button></Link>
                 </StyledConfirmEmailContainer>
             </StyledContainer>
         )

@@ -7,8 +7,9 @@ import { loginUser, deleteError, googleLogin } from '../../actions';
 import { Link } from 'react-router-dom';
 import { StyledLogin } from './Login.styled';
 import { StyledContainer } from '../../style/global';
-
 import { DeleteAlert, Loading } from '../../components';
+
+import config from '../../config';
 
 const Login = (props) => {
 
@@ -33,7 +34,7 @@ const Login = (props) => {
         } else {
             setIsLoading(true);
             event.preventDefault();
-            loginUser(form, '/#/profile');
+            loginUser(form, `${config.devUrl}/profile`);
         }
     };
 
@@ -78,7 +79,7 @@ const Login = (props) => {
 
     const handleGoogleLogin = (event) =>{
         event.preventDefault()
-        googleLogin('/#/profile')
+        googleLogin(`${config.devUrl}/profile`)
     }
 
     return (

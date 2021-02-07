@@ -1,7 +1,7 @@
 import axios from 'axios';
+import config from '../config/index.js';
 
-//const localUrl = 'https://to-do-ssr.rexguzman.vercel.app';
-const localUrl = 'http://localhost:8000';
+const localUrl = config.ssrLocalUrl;
 
 export const deleteToDo = (payload) => ({
     type: 'DELETE_TO_DO',
@@ -65,10 +65,7 @@ export const deleteError = (payload) => ({
 export const registerUser = (payload, redirectUrl) => {
     return (dispatch) => {
         axios
-            .post(
-                `${localUrl}/auth/sign-up`,
-                payload
-            )
+            .post(`${localUrl}/auth/sign-up`, payload)
             .then(({ data }) => dispatch(registerRequest(data)))
             .then(() => {
                 window.location.href = redirectUrl;
@@ -91,7 +88,10 @@ export const loginUser = ({ email, password }, redirectUrl) => {
                 sessionStorage.setItem('name', data.user.name);
                 sessionStorage.setItem('email', data.user.email);
                 sessionStorage.setItem('id', data.user.id);
-                sessionStorage.setItem('verifiedEmail', Boolean(data.user.verifiedEmail));
+                sessionStorage.setItem(
+                    'verifiedEmail',
+                    Boolean(data.user.verifiedEmail)
+                );
                 sessionStorage.setItem('isLogged', Boolean('true'));
                 document.cookie = `email=${data.user.email}`;
                 document.cookie = `name=${data.user.name}`;
@@ -114,16 +114,19 @@ export const googleLogin = (redirectUrl) => {
             method: 'get',
             withCredentials: true,
             headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Credentials": true,
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Credentials': true,
             },
         })
             .then(({ data }) => {
                 sessionStorage.setItem('name', data.user.name);
                 sessionStorage.setItem('email', data.user.email);
                 sessionStorage.setItem('id', data.user.id);
-                sessionStorage.setItem('verifiedEmail', data.user.verifiedEmail);
+                sessionStorage.setItem(
+                    'verifiedEmail',
+                    data.user.verifiedEmail
+                );
                 sessionStorage.setItem('isLogged', Boolean('true'));
                 document.cookie = `email=${data.user.email}`;
                 document.cookie = `name=${data.user.name}`;
@@ -138,14 +141,6 @@ export const googleLogin = (redirectUrl) => {
             .catch((error) => dispatch(setError(error)));
     };
 };
-
-//const win = window.open('http://localhost:8000/auth/google-oauth', 'google',"height=800,width=600,modal=yes,alwaysRaised=yes");
-//      const timer = setInterval(function() {
-//        if (win.closed) {
-//          clearInterval(timer);
-//        alert("'Secure Payment' window closed !");
-//  }
-//}, 500);
 
 export const toDoRequest = (userId) => {
     return (dispatch) => {
@@ -201,7 +196,7 @@ export const updateToDoUser = (payload) => {
             url: `${localUrl}/user-to-dos`,
             method: 'put',
             data: payload,
-           //withCredentials: true,
+            //withCredentials: true,
         })
             .then(({ data }) => {
                 dispatch(editToDo(data.data));

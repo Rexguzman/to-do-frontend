@@ -7,8 +7,9 @@ import { registerUser, deleteError } from '../../actions';
 import { Link } from 'react-router-dom';
 import { StyledRegister } from './Register.styled';
 import { StyledContainer } from '../../style/global';
-
 import { DeleteAlert, Loading } from '../../components';
+
+import config from '../../config';
 
 const Register = (props) => {
     const { error, registerUser, deleteError } = props;
@@ -33,7 +34,7 @@ const Register = (props) => {
         } else {
             setIsLoading(true);
             event.preventDefault();
-            registerUser(form, '/#/login');
+            registerUser(form, `${config.devUrl}/login`);
         }
     };
 
