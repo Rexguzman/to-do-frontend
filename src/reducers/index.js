@@ -26,7 +26,7 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 user: action.info,
-                notes:[]
+                notes: [],
             };
         case 'REGISTER_REQUEST':
             return {
@@ -59,7 +59,7 @@ const reducer = (state, action) => {
                 ...state,
                 notes: [...state.notes],
             };
-            case 'TO_DO_LISTED':
+        case 'TO_DO_LISTED':
             return {
                 ...state,
                 notes: action.payload,

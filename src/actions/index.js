@@ -1,7 +1,7 @@
 import axios from 'axios';
 import config from '../config/index.js';
 
-const localUrl = config.ssrLocalUrl;
+const localUrl = config.ssrProductionUrl;
 
 export const deleteToDo = (payload) => ({
     type: 'DELETE_TO_DO',
