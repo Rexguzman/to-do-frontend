@@ -116,7 +116,7 @@ const Login = (props) => {
                             Iniciar Sesión
                         </button>
                     </form>
-                    <a href="http://localhost:8000/auth/google-oauth">
+                    <a href={`${config.ssrProductionUrl}/auth/google-oauth`}>
                     <section className="google_auth">
                         <figure>
                             <img
