@@ -112,7 +112,7 @@ export const googleLogin = (redirectUrl) => {
         axios({
             url: `${localUrl}/auth/success`,
             method: 'get',
-            withCredentials: true,
+            //withCredentials: true,
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
