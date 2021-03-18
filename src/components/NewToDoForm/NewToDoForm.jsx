@@ -30,6 +30,7 @@ const NewToDoForm = props => {
         event.preventDefault();
         newUserToDo(form);
         setValues({
+            userId: user.id,
             title: '', 
             description: '',
             completed: false,
